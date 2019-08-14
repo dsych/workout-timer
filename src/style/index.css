@@ -1,0 +1,29 @@
+body {
+    background-color: #7FFFD4;
+    /* margin: 0 auto; */
+}
+
+.margin-sides-10 {
+    margin-right: 10px;
+    margin-left: 10px;
+    display: inline;
+}
+
+.controls {
+    background-color: yellow; 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+}
+.controls li {
+    display: inline-block;
+    vertical-align: middle;
+}
+.block {
+    display: inline;
+}
+.button {
+    font-size: 20px;
+    padding: 5px;
+}
