@@ -1,5 +1,6 @@
 body {
     background-color: #7FFFD4;
+    font-size: 15px;
     /* margin: 0 auto; */
 }
 
@@ -9,21 +10,40 @@ body {
     display: inline;
 }
 
+.margin-vert-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .controls {
     background-color: yellow; 
-    list-style-type: none;
     margin: 0;
     padding: 0;
-    text-align: justify;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.controls li {
+/* .controls li {
     display: inline-block;
-    vertical-align: middle;
-}
-.block {
+} */
+/* .block {
     display: inline;
-}
+} */
 .button {
     font-size: 20px;
     padding: 5px;
+}
+
+.digit {
+    padding: 5px;
+    width: 20px;
+    text-align: center;
+}
+
+.play-button {
+    border-radius: 50%;
+    background-color: darkgray;
+    font-size: 30px;
+    padding: 10px;
+    float: right;
 }
