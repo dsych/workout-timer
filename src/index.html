@@ -1,71 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Workout Timer</title>
+        <link rel="stylesheet" type="text/css" href="style/index.css" />
+        <link
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+            crossorigin="anonymous"
+        />
+        <script src="./index.js"></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Workout Timer</title>
-    <link rel="stylesheet" type="text/css" href="style/index.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-</head>
-
-<body>
-    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%">
-        <div class="controls margin-sides-10" style="width: 100%">
-            <div class="button margin-sides-10">
-                <div class="fa fa-volume-up" aria-hidden="true"></div>
+    <body>
+        <div
+            style="display: flex; flex-direction: column; justify-content: space-between; height: 100%"
+        >
+            <div class="controls margin-sides-10" style="width: 100%">
+                <div id="sound" class="button margin-sides-10">
+                    <div class="enabled">
+                        <div class="fa fa-volume-up" aria-hidden="true"></div>
+                    </div>
+                    <div class="hidden disabled">
+                        <div class="fa fa-volume-off" aria-hidden="true"></div>
+                    </div>
+                </div>
+                <div class="button" style="width: 400px">
+                    <input
+                        id="mixer"
+                        type="range"
+                        min="0"
+                        max="100"
+                        style="width: 100%"
+                    />
+                </div>
+                <div
+                    class="button margin-sides-10"
+                    style="align-self: flex-end"
+                >
+                    <div class="fa fa-ellipsis-v" aria-hidden="true"></div>
+                </div>
             </div>
-            <div class="button" style="width: 400px">
-                <input type="range" min="1" max="100" style="width: 100%">
-            </div>
-            <div class="button margin-sides-10" style="align-self: flex-end">
-                <div class="fa fa-ellipsis-v" aria-hidden="true"></div>
-            </div>
-        </div>
-        <div style="width: 100%; background-color: coral;">
-            <div class="margin-vert-10">
-                <div>
-                    <div style="text-align: center;">Sets</div>
-                    <div style="display: flex; align-items: center; justify-content: center">
-                        <div class="fa fa-minus-square button" aria-hidden="true"></div>
-                        <div class="digit" style="width: 100px">
-                            3
+            <div style="width: 100%; background-color: coral;">
+                <div class="margin-vert-10">
+                    <div>
+                        <div style="text-align: center;">Sets</div>
+                        <div
+                            style="display: flex; align-items: center; justify-content: center"
+                        >
+                            <div
+                                class="fa fa-minus-square button"
+                                aria-hidden="true"
+                            ></div>
+                            <div class="digit" style="width: 100px">
+                                3
+                            </div>
+                            <div
+                                class="fa fa-plus-square button"
+                                aria-hidden="true"
+                            ></div>
                         </div>
-                        <div class="fa fa-plus-square button" aria-hidden="true"></div>
+                    </div>
+                </div>
+                <div class="margin-vert-10">
+                    <div>
+                        <div style="text-align: center;">Work Interval</div>
+                        <div
+                            style="display: flex; align-items: center; justify-content: center"
+                        >
+                            <div
+                                class="fa fa-minus-square button"
+                                aria-hidden="true"
+                            ></div>
+                            <div class="digit" style="width: 100px">
+                                01 : 10
+                            </div>
+                            <div
+                                class="fa fa-plus-square button"
+                                aria-hidden="true"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-vert-10">
+                    <div>
+                        <div style="text-align: center;">Rest Interval</div>
+                        <div
+                            style="display: flex; align-items: center; justify-content: center"
+                        >
+                            <div
+                                class="fa fa-minus-square button"
+                                aria-hidden="true"
+                            ></div>
+                            <div class="digit" style="width: 100px">
+                                01 : 00
+                            </div>
+                            <div
+                                class="fa fa-plus-square button"
+                                aria-hidden="true"
+                            ></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="margin-vert-10">
-                <div>
-                    <div style="text-align: center;">Work Interval</div>
-                    <div style="display: flex; align-items: center; justify-content: center">
-                        <div class="fa fa-minus-square button" aria-hidden="true"></div>
-                        <div class="digit" style="width: 100px">
-                            01 : 10
-                        </div>
-                        <div class="fa fa-plus-square button" aria-hidden="true"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="margin-vert-10">
-                <div>
-                    <div style="text-align: center;">Rest Interval</div>
-                    <div style="display: flex; align-items: center; justify-content: center">
-                        <div class="fa fa-minus-square button" aria-hidden="true"></div>
-                        <div class="digit" style="width: 100px">
-                            01 : 00
-                        </div>
-                        <div class="fa fa-plus-square button" aria-hidden="true"></div>
-                    </div>
-                </div>
+            <div
+                class="margin-vert-10"
+                style="width: 100%; background-color: darkmagenta;"
+            >
+                <div
+                    class="fa fa-play button play-button margin-sides-10"
+                    aria-hidden="true"
+                ></div>
             </div>
         </div>
-        <div class="margin-vert-10" style="width: 100%; background-color: darkmagenta;">
-            <div class="fa fa-play button play-button margin-sides-10" aria-hidden="true"></div>
-        </div>
-    </div>
-</body>
-
+    </body>
 </html>

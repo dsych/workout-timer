@@ -1,10 +1,11 @@
 body {
-    background-color: #7FFFD4;
+    background-color: #7fffd4;
     font-size: 15px;
     /* margin: 0 auto; */
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
@@ -21,7 +22,7 @@ html, body {
 }
 
 .controls {
-    background-color: yellow; 
+    background-color: yellow;
     margin: 0;
     padding: 0;
     display: flex;
@@ -36,11 +37,12 @@ html, body {
 } */
 .button {
     font-size: 20px;
-    display:inline-block;
-    cursor:pointer;
-    vertical-align:middle;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
     padding: 5px;
     text-align: center;
+    width: 25px;
 }
 .button:active {
     color: darkgray;
@@ -59,4 +61,9 @@ html, body {
     padding: 10px;
     float: right;
     color: white;
+    width: auto;
+}
+
+.hidden {
+    display: none;
 }
