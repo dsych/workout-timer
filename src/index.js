@@ -18,6 +18,8 @@ window.addEventListener("load", () => {
     const mixerEl = document.querySelector("#mixer");
     const percentageEl = soundEl.querySelector("#percentage");
 
+    const setsEl = document.querySelector("#sets");
+
     // configure sound toggle
     soundEl.classList.add(soundOn);
     soundEl.addEventListener("click", () => {
@@ -57,5 +59,21 @@ window.addEventListener("load", () => {
 
     mixerEl.addEventListener("input", e => {
         percentageEl.textContent = `${mixerEl.value} %`;
+    });
+
+    const setsValueEl = setsEl.querySelector(".digit");
+    // configure sets
+    setsEl.querySelector(".minus").addEventListener("click", () => {
+        let v = parseInt(setsValueEl.textContent);
+        if (v > 0) {
+            setsValueEl.textContent = `${--v}`;
+        }
+    });
+    setsEl.querySelector(".plus").addEventListener("click", () => {
+        let v = parseInt(setsValueEl.textContent);
+
+        if (v < 100) {
+            setsValueEl.textContent = `${++v}`;
+        }
     });
 });
