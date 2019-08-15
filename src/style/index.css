@@ -42,7 +42,7 @@ body {
     vertical-align: middle;
     padding: 5px;
     text-align: center;
-    width: 25px;
+    width: 40px;
 }
 .button:active {
     color: darkgray;

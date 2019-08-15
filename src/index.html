@@ -19,16 +19,21 @@
         <div
             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%"
         >
-            <div class="controls margin-sides-10" style="width: 100%">
-                <div id="sound" class="button margin-sides-10">
-                    <div class="enabled">
+            <div class="controls" style="width: 100%">
+                <div id="sound" class="button">
+                    <div id="enabled">
                         <div class="fa fa-volume-up" aria-hidden="true"></div>
                     </div>
-                    <div class="hidden disabled">
+                    <div id="disabled" class="hidden">
                         <div class="fa fa-volume-off" aria-hidden="true"></div>
                     </div>
+                    <div
+                        id="percentage"
+                        style="font-size: 15px;"
+                        class="hidden"
+                    ></div>
                 </div>
-                <div class="button" style="width: 400px">
+                <div class="button" style="width: 50%">
                     <input
                         id="mixer"
                         type="range"
@@ -37,10 +42,7 @@
                         style="width: 100%"
                     />
                 </div>
-                <div
-                    class="button margin-sides-10"
-                    style="align-self: flex-end"
-                >
+                <div class="button" style="align-self: flex-end">
                     <div class="fa fa-ellipsis-v" aria-hidden="true"></div>
                 </div>
             </div>
