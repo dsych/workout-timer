@@ -4,6 +4,11 @@ body {
     /* margin: 0 auto; */
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 .margin-sides-10 {
     margin-right: 10px;
     margin-left: 10px;
@@ -31,7 +36,14 @@ body {
 } */
 .button {
     font-size: 20px;
+    display:inline-block;
+    cursor:pointer;
+    vertical-align:middle;
     padding: 5px;
+    text-align: center;
+}
+.button:active {
+    color: darkgray;
 }
 
 .digit {
@@ -42,8 +54,9 @@ body {
 
 .play-button {
     border-radius: 50%;
-    background-color: darkgray;
+    background-color: black;
     font-size: 30px;
     padding: 10px;
     float: right;
+    color: white;
 }
