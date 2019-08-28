@@ -1,6 +1,4 @@
-import { AbstractComponent } from "./abstract-component";
-
-class VolumeControls extends AbstractComponent {
+class VolumeControls extends HTMLElement {
     constructor() {
         super();
 
@@ -12,26 +10,32 @@ class VolumeControls extends AbstractComponent {
         this.percentageEl = null;
     }
 
-    static get boundAttributes() {
-        return ["soundIsOn"];
+    static get observedAttributes() {
+        return ["isSoundOn"];
+    }
+
+    get isSoundOn() {
+        return this.getAttribute("isSoundOn") === "true";
+    }
+
+    set isSoundOn(isOn) {
+        this.setAttribute("isSoundOn", isOn);
+        if (this.soundEl) {
+            this.soundEl
+                .querySelector("div#enabled")
+                .classList.toggle("hidden", !isOn);
+            this.soundEl
+                .querySelector("div#disabled")
+                .classList.toggle("hidden", isOn);
+        }
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         this[attrName] = newValue;
     }
-
-    toggleSoundState(parent, toBeEnabled, toBeDisabled) {
-        if (parent.classList.contains(this.soundOn)) {
-            parent.classList.remove(this.soundOn);
-            parent.classList.add(this.soundOff);
-        } else {
-            parent.classList.remove(this.soundOff);
-            parent.classList.add(this.soundOn);
-        }
-        parent.querySelector(`div#${toBeDisabled}`).classList.add("hidden");
-        parent.querySelector(`div#${toBeEnabled}`).classList.remove("hidden");
-    }
     connectedCallback() {
+        this.isSoundOn = true;
+
         const template = document.querySelector("#volume-controls");
         this.appendChild(document.importNode(template.content, true));
         this.soundEl = this.querySelector("#sound");
@@ -39,15 +43,13 @@ class VolumeControls extends AbstractComponent {
         this.percentageEl = this.soundEl.querySelector("#percentage");
 
         // configure sound toggle
-        this.soundEl.classList.add(this.soundOn);
         this.soundEl.addEventListener("click", () => {
+            this.isSoundOn = !this.isSoundOn;
             if (this.soundEl.classList.contains(this.soundOn)) {
-                this.toggleSoundState(this.soundEl, "disabled", "enabled");
                 mixer.className = "";
                 this.mixerEl.classList.add(mixer.value);
                 this.mixerEl.value = 0;
             } else {
-                this.toggleSoundState(this.soundEl, "enabled", "disabled");
                 mixer.value = +mixer.classList.item(0);
                 mixer.className = "";
             }
@@ -63,21 +65,10 @@ class VolumeControls extends AbstractComponent {
 
         this.mixerEl.addEventListener("mouseup", () => {
             this.percentageEl.classList.add("hidden");
-            if (
+            this.isSoundOn =
                 (this.soundEl.classList.contains(this.soundOn) &&
                     +mixer.value > 0) ||
-                +mixer.value > 0
-            ) {
-                this.soundEl
-                    .querySelector("div#enabled")
-                    .classList.remove("hidden");
-                this.soundEl.classList.remove(this.soundOff);
-                this.soundEl.classList.add(this.soundOn);
-            } else {
-                this.soundEl
-                    .querySelector("div#disabled")
-                    .classList.remove("hidden");
-            }
+                +mixer.value > 0;
         });
 
         this.mixerEl.addEventListener("input", e => {
