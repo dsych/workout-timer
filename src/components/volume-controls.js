@@ -1,4 +1,6 @@
-class VolumeControls extends HTMLElement {
+import { AbstractComponent } from "./abstract-component";
+
+class VolumeControls extends AbstractComponent {
     constructor() {
         super();
 
@@ -8,6 +10,14 @@ class VolumeControls extends HTMLElement {
         this.soundEl = null;
         this.mixerEl = null;
         this.percentageEl = null;
+    }
+
+    static get boundAttributes() {
+        return ["soundIsOn"];
+    }
+
+    attributeChangedCallback(attrName, oldValue, newValue) {
+        this[attrName] = newValue;
     }
 
     toggleSoundState(parent, toBeEnabled, toBeDisabled) {
