@@ -13,39 +13,44 @@
             crossorigin="anonymous"
         />
         <script src="./index.js"></script>
+        <script src="./components/volume-controls.js"></script>
     </head>
+
+    <template id="volume-controls">
+        <div class="controls">
+            <div id="sound" class="button">
+                <div id="enabled">
+                    <div class="fa fa-volume-up" aria-hidden="true"></div>
+                </div>
+                <div id="disabled" class="hidden">
+                    <div class="fa fa-volume-off" aria-hidden="true"></div>
+                </div>
+                <div
+                    id="percentage"
+                    style="font-size: 15px;"
+                    class="hidden"
+                ></div>
+            </div>
+            <div class="button" style="width: 50%">
+                <input
+                    id="mixer"
+                    type="range"
+                    min="0"
+                    max="100"
+                    style="width: 100%"
+                />
+            </div>
+            <div class="button" style="align-self: flex-end">
+                <div class="fa fa-ellipsis-v" aria-hidden="true"></div>
+            </div>
+        </div>
+    </template>
 
     <body>
         <div
             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%"
         >
-            <div class="controls" style="width: 100%">
-                <div id="sound" class="button">
-                    <div id="enabled">
-                        <div class="fa fa-volume-up" aria-hidden="true"></div>
-                    </div>
-                    <div id="disabled" class="hidden">
-                        <div class="fa fa-volume-off" aria-hidden="true"></div>
-                    </div>
-                    <div
-                        id="percentage"
-                        style="font-size: 15px;"
-                        class="hidden"
-                    ></div>
-                </div>
-                <div class="button" style="width: 50%">
-                    <input
-                        id="mixer"
-                        type="range"
-                        min="0"
-                        max="100"
-                        style="width: 100%"
-                    />
-                </div>
-                <div class="button" style="align-self: flex-end">
-                    <div class="fa fa-ellipsis-v" aria-hidden="true"></div>
-                </div>
-            </div>
+            <volume-controls style="width: 100%"></volume-controls>
             <div style="width: 100%; background-color: coral;">
                 <div class="margin-vert-10">
                     <div>
