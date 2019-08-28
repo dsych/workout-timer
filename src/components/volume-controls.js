@@ -1,17 +1,25 @@
 class VolumeControls extends HTMLElement {
     constructor() {
         super();
-
-        this.soundOn = "on";
-        this.soundOff = "off";
-
         this.soundEl = null;
         this.mixerEl = null;
         this.percentageEl = null;
+
+        this.oldPercentage = 0;
     }
 
     static get observedAttributes() {
         return ["isSoundOn"];
+    }
+
+    get percentage() {
+        return +this.mixerEl.value;
+    }
+
+    set percentage(value) {
+        if (this.percentageEl) {
+            this.percentageEl.textContent = `${value} %`;
+        }
     }
 
     get isSoundOn() {
@@ -34,25 +42,19 @@ class VolumeControls extends HTMLElement {
         this[attrName] = newValue;
     }
     connectedCallback() {
-        this.isSoundOn = true;
-
         const template = document.querySelector("#volume-controls");
         this.appendChild(document.importNode(template.content, true));
         this.soundEl = this.querySelector("#sound");
         this.mixerEl = this.querySelector("#mixer");
         this.percentageEl = this.soundEl.querySelector("#percentage");
 
+        this.isSoundOn = true;
+        this.oldPercentage = this.percentage;
+
         // configure sound toggle
         this.soundEl.addEventListener("click", () => {
+            this.mixerEl.value = this.isSoundOn ? 0 : this.oldPercentage;
             this.isSoundOn = !this.isSoundOn;
-            if (this.soundEl.classList.contains(this.soundOn)) {
-                mixer.className = "";
-                this.mixerEl.classList.add(mixer.value);
-                this.mixerEl.value = 0;
-            } else {
-                mixer.value = +mixer.classList.item(0);
-                mixer.className = "";
-            }
         });
 
         // configure mixer to display sound percentage instead of sound when moved
@@ -72,7 +74,8 @@ class VolumeControls extends HTMLElement {
         });
 
         this.mixerEl.addEventListener("input", e => {
-            this.percentageEl.textContent = `${this.mixerEl.value} %`;
+            this.oldPercentage = this.percentage;
+            this.percentage = e.target.value;
         });
     }
 }
