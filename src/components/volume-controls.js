@@ -6,6 +6,11 @@ class VolumeControls extends HTMLElement {
         this.percentageEl = null;
 
         this.oldPercentage = 0;
+
+        this.handleClick = this.handleClick.bind(this);
+        this.handleMouseDown = this.handleMouseDown.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
+        this.handleInput = this.handleInput.bind(this);
     }
 
     static get observedAttributes() {
@@ -41,6 +46,28 @@ class VolumeControls extends HTMLElement {
     attributeChangedCallback(attrName, oldValue, newValue) {
         this[attrName] = newValue;
     }
+    handleClick() {
+        this.mixerEl.value = this.isSoundOn ? 0 : this.oldPercentage;
+        this.isSoundOn = !this.isSoundOn;
+    }
+    handleMouseDown() {
+        this.soundEl.querySelector(`div#disabled`).classList.add("hidden");
+        this.soundEl.querySelector(`div#enabled`).classList.add("hidden");
+        this.percentageEl.classList.remove("hidden");
+        this.percentageEl.textContent = `${this.mixerEl.value} %`;
+    }
+    handleMouseUp() {
+        this.percentageEl.classList.add("hidden");
+        this.isSoundOn =
+            (this.soundEl.classList.contains(this.soundOn) &&
+                +mixer.value > 0) ||
+            +mixer.value > 0;
+    }
+    handleInput(e) {
+        this.oldPercentage = this.percentage;
+        this.percentage = e.target.value;
+    }
+
     connectedCallback() {
         const template = document.querySelector("#volume-controls");
         this.appendChild(document.importNode(template.content, true));
@@ -52,31 +79,20 @@ class VolumeControls extends HTMLElement {
         this.oldPercentage = this.percentage;
 
         // configure sound toggle
-        this.soundEl.addEventListener("click", () => {
-            this.mixerEl.value = this.isSoundOn ? 0 : this.oldPercentage;
-            this.isSoundOn = !this.isSoundOn;
-        });
+        this.soundEl.addEventListener("click", this.handleClick);
 
         // configure mixer to display sound percentage instead of sound when moved
-        this.mixerEl.addEventListener("mousedown", () => {
-            this.soundEl.querySelector(`div#disabled`).classList.add("hidden");
-            this.soundEl.querySelector(`div#enabled`).classList.add("hidden");
-            this.percentageEl.classList.remove("hidden");
-            this.percentageEl.textContent = `${this.mixerEl.value} %`;
-        });
+        this.mixerEl.addEventListener("mousedown", this.handleMouseDown);
 
-        this.mixerEl.addEventListener("mouseup", () => {
-            this.percentageEl.classList.add("hidden");
-            this.isSoundOn =
-                (this.soundEl.classList.contains(this.soundOn) &&
-                    +mixer.value > 0) ||
-                +mixer.value > 0;
-        });
+        this.mixerEl.addEventListener("mouseup", this.handleMouseUp);
 
-        this.mixerEl.addEventListener("input", e => {
-            this.oldPercentage = this.percentage;
-            this.percentage = e.target.value;
-        });
+        this.mixerEl.addEventListener("input", this.handleInput);
+    }
+    disconnectedCallback() {
+        this.soundEl.removeEventListener("click", this.handleClick);
+        this.mixerEl.removeEventListener("mousedown", this.handleMouseDown);
+        this.mixerEl.removeEventListener("mouseup", this.handleMouseUp);
+        this.mixerEl.removeEventListener("input", this.handleInput);
     }
 }
 

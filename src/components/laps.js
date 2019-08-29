@@ -10,6 +10,9 @@ export class Laps extends HTMLElement {
         this.plusEl = null;
 
         this.lcount = initLaps;
+
+        this.handleMinus = this.handleMinus.bind(this);
+        this.handlePlus = this.handlePlus.bind(this);
     }
 
     static get observedAttributes() {
@@ -30,6 +33,14 @@ export class Laps extends HTMLElement {
         this[attrName] = newValue;
     }
 
+    handleMinus() {
+        this.laps--;
+    }
+
+    handlePlus() {
+        this.laps++;
+    }
+
     init() {
         this.captionEl = this.querySelector(".caption");
         this.minusEl = this.querySelector(".minus");
@@ -39,13 +50,8 @@ export class Laps extends HTMLElement {
             "label"
         ).value;
 
-        this.minusEl.addEventListener("click", () => {
-            this.laps--;
-        });
-
-        this.plusEl.addEventListener("click", () => {
-            this.laps++;
-        });
+        this.minusEl.addEventListener("click", this.handleMinus);
+        this.plusEl.addEventListener("click", this.handlePlus);
     }
 
     connectedCallback() {
@@ -53,5 +59,10 @@ export class Laps extends HTMLElement {
         this.appendChild(document.importNode(template.content, true));
         this.init();
         this.laps = this.lcount;
+    }
+
+    disconnectedCallback() {
+        this.minusEl.removeEventListener("click", this.handleMinus);
+        this.plusEl.removeEventListener("click", this.handlePlus);
     }
 }
