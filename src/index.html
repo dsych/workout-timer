@@ -14,6 +14,7 @@
         />
         <script src="./index.js"></script>
         <script src="./components/volume-controls.js"></script>
+        <script src="./components/sets.js"></script>
     </head>
 
     <template id="volume-controls">
@@ -46,33 +47,33 @@
         </div>
     </template>
 
+    <template id="laps">
+        <div class="margin-vert-10">
+            <div style="text-align: center;">Sets</div>
+            <div
+                style="display: flex; align-items: center; justify-content: center"
+            >
+                <div
+                    class="fa fa-minus-square button minus"
+                    aria-hidden="true"
+                ></div>
+                <div class="caption" style="width: 100px">
+                    3
+                </div>
+                <div
+                    class="fa fa-plus-square button plus"
+                    aria-hidden="true"
+                ></div>
+            </div>
+        </div>
+    </template>
+
     <body>
         <div
             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%"
         >
             <volume-controls style="width: 100%"></volume-controls>
-            <div style="width: 100%; background-color: coral;">
-                <div class="margin-vert-10">
-                    <div>
-                        <div style="text-align: center;">Sets</div>
-                        <div
-                            id="sets"
-                            style="display: flex; align-items: center; justify-content: center"
-                        >
-                            <div
-                                class="fa fa-minus-square button minus"
-                                aria-hidden="true"
-                            ></div>
-                            <div class="digit" style="width: 100px">
-                                3
-                            </div>
-                            <div
-                                class="fa fa-plus-square button plus"
-                                aria-hidden="true"
-                            ></div>
-                        </div>
-                    </div>
-                </div>
+            <set-count style="background-color: coral;"></set-count>
                 <div class="margin-vert-10">
                     <div id="work">
                         <div style="text-align: center;">Work Interval</div>
@@ -83,7 +84,7 @@
                                 class="fa fa-minus-square button minus"
                                 aria-hidden="true"
                             ></div>
-                            <div class="digit" style="width: 100px">
+                            <div class="caption" style="width: 100px">
                                 <div class="mins" style="display: inline-block">
                                     01
                                 </div>
@@ -109,7 +110,7 @@
                                 class="fa fa-minus-square button minus"
                                 aria-hidden="true"
                             ></div>
-                            <div class="digit" style="width: 100px">
+                            <div class="caption" style="width: 100px">
                                 <div class="mins" style="display: inline-block">
                                     01
                                 </div>
@@ -125,15 +126,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div
-                class="margin-vert-10"
-                style="width: 100%; background-color: darkmagenta;"
-            >
                 <div
-                    class="fa fa-play button play-button margin-sides-10"
-                    aria-hidden="true"
-                ></div>
+                    class="margin-vert-10"
+                    style="width: 100%; background-color: darkmagenta;"
+                >
+                    <div
+                        class="fa fa-play button play-button margin-sides-10"
+                        aria-hidden="true"
+                    ></div>
+                </div>
             </div>
         </div>
     </body>

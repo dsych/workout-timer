@@ -1,8 +1,8 @@
 "use strict";
 
 const setupClock = parent => {
-    const minsEl = parent.querySelector(".digit > .mins");
-    const secsEl = parent.querySelector(".digit > .secs");
+    const minsEl = parent.querySelector(".caption > .mins");
+    const secsEl = parent.querySelector(".caption > .secs");
 
     parent.querySelector(".minus").addEventListener("click", () => {
         let mins = +minsEl.textContent;
@@ -38,25 +38,8 @@ const setupClock = parent => {
 };
 
 window.addEventListener("load", () => {
-    const setsEl = document.querySelector("#sets");
     const workEl = document.querySelector("#work");
     const restEl = document.querySelector("#rest");
-
-    // configure sets
-    const setsValueEl = setsEl.querySelector(".digit");
-    setsEl.querySelector(".minus").addEventListener("click", () => {
-        let v = parseInt(setsValueEl.textContent);
-        if (v > 0) {
-            setsValueEl.textContent = `${--v}`;
-        }
-    });
-    setsEl.querySelector(".plus").addEventListener("click", () => {
-        let v = parseInt(setsValueEl.textContent);
-
-        if (v < 100) {
-            setsValueEl.textContent = `${++v}`;
-        }
-    });
 
     //configure work intervals
     setupClock(workEl);
