@@ -34,7 +34,6 @@ export class Laps extends HTMLElement {
         this.captionEl = this.querySelector(".caption");
         this.minusEl = this.querySelector(".minus");
         this.plusEl = this.querySelector(".plus");
-        console.log(this.attributes);
 
         this.querySelector(".label").textContent = this.attributes.getNamedItem(
             "label"
