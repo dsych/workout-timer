@@ -4,7 +4,6 @@ export class Laps extends HTMLElement {
 
         this.update = update;
         this.format = format;
-        this.initial = "startingValue";
 
         this.captionEl = null;
         this.minusEl = null;
@@ -13,8 +12,8 @@ export class Laps extends HTMLElement {
         this.lcount = initLaps;
     }
 
-    static get observerAttributes() {
-        return [this.initial];
+    static get observedAttributes() {
+        return ["laps", "label"];
     }
 
     set laps(value) {
@@ -35,6 +34,11 @@ export class Laps extends HTMLElement {
         this.captionEl = this.querySelector(".caption");
         this.minusEl = this.querySelector(".minus");
         this.plusEl = this.querySelector(".plus");
+        console.log(this.attributes);
+
+        this.querySelector(".label").textContent = this.attributes.getNamedItem(
+            "label"
+        ).value;
 
         this.minusEl.addEventListener("click", () => {
             this.laps--;

@@ -50,7 +50,7 @@
 
     <template id="laps">
         <div class="margin-vert-10">
-            <div style="text-align: center;">Sets</div>
+            <div style="text-align: center;" class="label"></div>
             <div
                 style="display: flex; align-items: center; justify-content: center"
             >
@@ -74,9 +74,12 @@
             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%"
         >
             <volume-controls style="width: 100%"></volume-controls>
-            <set-count style="background-color: coral;"></set-count>
-            <duration-clock></duration-clock>
-            <duration-clock></duration-clock>
+            <set-count
+                label="Sets"
+                style="background-color: coral;"
+            ></set-count>
+            <duration-clock label="Work Interval"></duration-clock>
+            <duration-clock label="Rest Interval"></duration-clock>
 
             <div
                 class="margin-vert-10"
