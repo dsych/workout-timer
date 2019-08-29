@@ -1,8 +1,9 @@
 export class Laps extends HTMLElement {
-    constructor(updateFunc, initLaps) {
+    constructor(update, format, initLaps) {
         super();
 
-        this.updateFunc = updateFunc;
+        this.update = update;
+        this.format = format;
         this.initial = "startingValue";
 
         this.captionEl = null;
@@ -18,8 +19,8 @@ export class Laps extends HTMLElement {
 
     set laps(value) {
         if (this.captionEl) {
-            this.lcount = this.updateFunc(this.lcount, value);
-            this.captionEl.textContent = `${this.lcount}`;
+            this.lcount = this.update(this.lcount, value);
+            this.captionEl.textContent = `${this.format(this.lcount)}`;
         }
     }
     get laps() {

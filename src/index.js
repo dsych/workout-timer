@@ -42,8 +42,8 @@ window.addEventListener("load", () => {
     const restEl = document.querySelector("#rest");
 
     //configure work intervals
-    setupClock(workEl);
+    // setupClock(workEl);
 
     //configure rest intervals
-    setupClock(restEl);
+    // setupClock(restEl);
 });

@@ -15,6 +15,7 @@
         <script src="./index.js"></script>
         <script src="./components/volume-controls.js"></script>
         <script src="./components/sets.js"></script>
+        <script src="./components/clock.js"></script>
     </head>
 
     <template id="volume-controls">
@@ -74,68 +75,71 @@
         >
             <volume-controls style="width: 100%"></volume-controls>
             <set-count style="background-color: coral;"></set-count>
-                <div class="margin-vert-10">
-                    <div id="work">
-                        <div style="text-align: center;">Work Interval</div>
-                        <div
-                            style="display: flex; align-items: center; justify-content: center"
-                        >
-                            <div
-                                class="fa fa-minus-square button minus"
-                                aria-hidden="true"
-                            ></div>
-                            <div class="caption" style="width: 100px">
-                                <div class="mins" style="display: inline-block">
-                                    01
-                                </div>
-                                <div style="display: inline-block">:</div>
-                                <div class="secs" style="display: inline-block">
-                                    10
-                                </div>
-                            </div>
-                            <div
-                                class="fa fa-plus-square button plus"
-                                aria-hidden="true"
-                            ></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="margin-vert-10">
-                    <div id="rest">
-                        <div style="text-align: center;">Rest Interval</div>
-                        <div
-                            style="display: flex; align-items: center; justify-content: center"
-                        >
-                            <div
-                                class="fa fa-minus-square button minus"
-                                aria-hidden="true"
-                            ></div>
-                            <div class="caption" style="width: 100px">
-                                <div class="mins" style="display: inline-block">
-                                    01
-                                </div>
-                                <div style="display: inline-block">:</div>
-                                <div class="secs" style="display: inline-block">
-                                    00
-                                </div>
-                            </div>
-                            <div
-                                class="fa fa-plus-square button plus"
-                                aria-hidden="true"
-                            ></div>
-                        </div>
-                    </div>
-                </div>
+            <duration-clock></duration-clock>
+            <duration-clock></duration-clock>
+
+            <div
+                class="margin-vert-10"
+                style="width: 100%; background-color: darkmagenta;"
+            >
                 <div
-                    class="margin-vert-10"
-                    style="width: 100%; background-color: darkmagenta;"
-                >
-                    <div
-                        class="fa fa-play button play-button margin-sides-10"
-                        aria-hidden="true"
-                    ></div>
-                </div>
+                    class="fa fa-play button play-button margin-sides-10"
+                    aria-hidden="true"
+                ></div>
             </div>
         </div>
     </body>
 </html>
+<!-- 
+<div class="margin-vert-10">
+    <div id="work">
+        <div style="text-align: center;">Work Interval</div>
+        <div
+            style="display: flex; align-items: center; justify-content: center"
+        >
+            <div
+                class="fa fa-minus-square button minus"
+                aria-hidden="true"
+            ></div>
+            <div class="caption" style="width: 100px">
+                <div class="mins" style="display: inline-block">
+                    01
+                </div>
+                <div style="display: inline-block">:</div>
+                <div class="secs" style="display: inline-block">
+                    10
+                </div>
+            </div>
+            <div
+                class="fa fa-plus-square button plus"
+                aria-hidden="true"
+            >
+        </div>
+    </div>
+</div>
+<div class="margin-vert-10">
+    <div id="rest">
+        <div style="text-align: center;">Rest Interval</div>
+        <div
+            style="display: flex; align-items: center; justify-content: center"
+        >
+            <div
+                class="fa fa-minus-square button minus"
+                aria-hidden="true"
+            ></div>
+            <div class="caption" style="width: 100px">
+                <div class="mins" style="display: inline-block">
+                    01
+                </div>
+                <div style="display: inline-block">:</div>
+                <div class="secs" style="display: inline-block">
+                    00
+                </div>
+            </div>
+            <div
+                class="fa fa-plus-square button plus"
+                aria-hidden="true"
+            ></div>
+        </div>
+    </div>
+</div> -->
