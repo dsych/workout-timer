@@ -12,7 +12,7 @@ class StartButton extends HTMLElement {
 
     set paused(value) {
         if (this.buttonEl) {
-            if (value === true) {
+            if (value === true || value === "true") {
                 this.state = true;
                 this.buttonEl.classList.replace("fa-play", "fa-pause");
             } else {

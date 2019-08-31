@@ -17,6 +17,7 @@
         <script src="./components/sets.js"></script>
         <script src="./components/clock.js"></script>
         <script src="./components/start-button.js"></script>
+        <script src="./components/countdown.js"></script>
     </head>
 
     <template id="volume-controls">
@@ -77,6 +78,14 @@
         </div>
     </template>
 
+    <template id="countdown">
+        <div class="margin-vert-10">
+            <div style="text-align: center;" class="label"></div>
+            <div style="text-align: center;" class="currentIndex"></div>
+            <div style="text-align: center;" class="timer"></div>
+        </div>
+    </template>
+
     <body>
         <div
             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%"
@@ -89,6 +98,7 @@
             ></set-count>
             <duration-clock id="work" label="Work Interval"></duration-clock>
             <duration-clock id="rest" label="Rest Interval"></duration-clock>
+            <timed-countdown id="interval" class="hidden"></timed-countdown>
             <play-button
                 id="play-button"
                 style="width: 100%; background-color: darkmagenta;"

@@ -15,7 +15,7 @@ class Clock extends Laps {
                     "0"
                 )} : ${String(v % 60).padStart(2, "0")}`;
             },
-            60
+            1
         );
     }
 }
