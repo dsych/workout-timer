@@ -1,6 +1,6 @@
 # Planned features:
 
--   [ ] Countdown screen
+-   [x] Countdown screen
 
 -   [ ] Sounds and volume control
 
