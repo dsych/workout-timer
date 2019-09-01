@@ -6,6 +6,7 @@ window.addEventListener("load", () => {
     let workEl = document.querySelector("#work");
     let restEl = document.querySelector("#rest");
     let intervalEl = document.querySelector("#interval");
+    const soundEl = document.querySelector("#sound-controls");
 
     const switchContext = state => {
         if (state === true) {
@@ -33,5 +34,9 @@ window.addEventListener("load", () => {
     intervalEl.addEventListener("done", () => {
         switchContext(false);
         playEl.paused = false;
+    });
+
+    intervalEl.addEventListener("playSound", e => {
+        soundEl.dispatchEvent(new CustomEvent(e.type, e));
     });
 });

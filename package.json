@@ -1,19 +1,22 @@
 {
-  "name": "kaios-workout-timer",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "parcel serve src/index.html",
-    "build": "parcel build src/index.html && cp manifest.webapp dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "parcel": "^1.12.3"
-  },
-  "devDependencies": {
-    "prettier": "^1.18.2"
-  }
+    "name": "kaios-workout-timer",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "prestart": "npm run copy-resources",
+        "prebuild": "npm run copy-resources",
+        "copy-resources": "mkdir -p dist && cp -r resources dist",
+        "start": "parcel serve src/index.html",
+        "build": "parcel build src/index.html && cp manifest.webapp dist",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "parcel": "^1.12.3"
+    },
+    "devDependencies": {
+        "prettier": "^1.18.2"
+    }
 }

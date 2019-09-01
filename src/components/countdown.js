@@ -13,7 +13,13 @@ class Countdown extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ["repeats", "workInterval", "restInterval", "pause"];
+        return [
+            "repeats",
+            "workInterval",
+            "restInterval",
+            "pause",
+            "soundLevel"
+        ];
     }
 
     set pause(newValue) {
@@ -66,6 +72,13 @@ class Countdown extends HTMLElement {
                 2,
                 "0"
             )} : ${String(secs).padStart(2, "0")}`;
+            if (inrv <= 3) {
+                this.dispatchEvent(
+                    new CustomEvent("playSound", {
+                        detail: { track: "/resources/countdown.wav" }
+                    })
+                );
+            }
             return --inrv;
         };
         interval = display(interval);

@@ -68,9 +68,7 @@ class VolumeControls extends HTMLElement {
         this.percentage = e.target.value;
     }
 
-    connectedCallback() {
-        const template = document.querySelector("#volume-controls");
-        this.appendChild(document.importNode(template.content, true));
+    init() {
         this.soundEl = this.querySelector("#sound");
         this.mixerEl = this.querySelector("#mixer");
         this.percentageEl = this.soundEl.querySelector("#percentage");
@@ -87,6 +85,22 @@ class VolumeControls extends HTMLElement {
         this.mixerEl.addEventListener("mouseup", this.handleMouseUp);
 
         this.mixerEl.addEventListener("input", this.handleInput);
+
+        this.addEventListener("playSound", e => {
+            if (e.detail.track) {
+                const a = new Audio(e.detail.track);
+                a.volume = this.percentage / 100;
+                a.play().catch(err => {
+                    console.log(err.message);
+                });
+            }
+        });
+    }
+
+    connectedCallback() {
+        const template = document.querySelector("#volume-controls");
+        this.appendChild(document.importNode(template.content, true));
+        this.init();
     }
     disconnectedCallback() {
         this.soundEl.removeEventListener("click", this.handleClick);
