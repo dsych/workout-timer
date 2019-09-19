@@ -17,12 +17,12 @@ class Countdown extends HTMLElement {
             this.currentIndexEl.textContent = `${Math.ceil(this.repeats)}`;
             this.startTimer(+this.workInterval).then(left => {
                 this.repeats -= 0.5;
-                if (left <= 0) {
+                if (left <= 0 && !this.state) {
                     if (this.repeats > 0) {
                         this.labelEl.textContent = this.restLabel;
                         this.startTimer(+this.restInterval).then(left => {
                             this.repeats -= 0.5;
-                            if (left <= 0) {
+                            if (left <= 0 && !this.state) {
                                 if (this.repeats > 0) {
                                     this.pause = this.pause;
                                 } else {
@@ -53,18 +53,16 @@ class Countdown extends HTMLElement {
 
     startTimer(interval) {
         const display = inrv => {
-            const mins = Math.floor(inrv / 60);
-            const secs = inrv % 60;
-            this.timerEl.textContent = `${String(mins).padStart(
-                2,
-                "0"
-            )} : ${String(secs).padStart(2, "0")}`;
-            if (inrv <= 3) {
-                this.dispatchEvent(
-                    new CustomEvent("playSound", {
-                        detail: { track: "/resources/countdown.wav" }
-                    })
-                );
+            if (this.state) {
+                const mins = Math.floor(inrv / 60);
+                const secs = inrv % 60;
+                this.timerEl.textContent = `${String(mins).padStart(
+                    2,
+                    "0"
+                )} : ${String(secs).padStart(2, "0")}`;
+                if (inrv <= 3) {
+                    new Audio("/resources/countdown.wav").play();
+                }
             }
             return --inrv;
         };
@@ -72,7 +70,7 @@ class Countdown extends HTMLElement {
         return new Promise(resolve => {
             const i = setInterval(() => {
                 interval = display(interval);
-                if (interval < -1 || this.pause) {
+                if (interval < -1 || this.state) {
                     clearInterval(i);
                     resolve(interval);
                 }

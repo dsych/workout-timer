@@ -1,29 +1,47 @@
 "use strict";
 import "document-register-element";
 
+const createDurationEl = label => {
+    let el = document.createElement("set-count");
+    el.setAttribute("label", label);
+    return el;
+};
+
 window.addEventListener("load", () => {
     const playEl = document.querySelector("#play-button");
-    let countEl = document.querySelector("#count");
-    let workEl = document.querySelector("#work");
-    let restEl = document.querySelector("#rest");
-    let intervalEl = document.querySelector("#interval");
-    const soundEl = document.querySelector("#sound-controls");
+    const parent = playEl.parentElement;
+
+    let countEl;
+    let workEl;
+    let restEl;
+
+    let intervalEl = document.createElement("timed-countdown");
 
     const switchContext = state => {
         if (state === true) {
-            countEl.classList.add("hidden");
-            workEl.classList.add("hidden");
-            restEl.classList.add("hidden");
-            intervalEl.classList.remove("hidden");
+            parent.removeChild(countEl);
+            parent.removeChild(workEl);
+            parent.removeChild(restEl);
+            intervalEl = parent.insertBefore(
+                document.createElement("timed-countdown"),
+                playEl
+            );
             intervalEl.repeats = countEl.laps;
             intervalEl.workInterval = workEl.laps;
             intervalEl.restInterval = restEl.laps;
             intervalEl.pause = false;
         } else {
-            countEl.classList.remove("hidden");
-            workEl.classList.remove("hidden");
-            restEl.classList.remove("hidden");
-            intervalEl.classList.add("hidden");
+            parent.removeChild(intervalEl);
+            countEl = parent.insertBefore(createDurationEl("Rest"), playEl);
+            workEl = parent.insertBefore(
+                createDurationEl("Work Interval"),
+                playEl
+            );
+            restEl = parent.insertBefore(
+                createDurationEl("Rest Interval"),
+                playEl
+            );
+
             intervalEl.pause = true;
         }
     };
@@ -33,11 +51,9 @@ window.addEventListener("load", () => {
     });
 
     intervalEl.addEventListener("done", () => {
-        switchContext(false);
         playEl.paused = false;
     });
 
-    intervalEl.addEventListener("playSound", e => {
-        soundEl.dispatchEvent(new CustomEvent(e.type, e));
-    });
+    intervalEl = parent.insertBefore(intervalEl, playEl);
+    switchContext(false);
 });

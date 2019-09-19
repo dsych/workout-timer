@@ -7,12 +7,10 @@ class StartButton extends HTMLElement {
         if (this.buttonEl) {
             if (value === true || value === "true") {
                 this.state = true;
-                this.buttonEl.classList.remove("fa-play");
-                this.buttonEl.classList.add("fa-pause");
+                this.buttonEl.textContent = "Stop";
             } else {
                 this.state = false;
-                this.buttonEl.classList.remove("fa-pause");
-                this.buttonEl.classList.add("fa-play");
+                this.buttonEl.textContent = "Start";
             }
             this.dispatchEvent(
                 new CustomEvent("start", { detail: { state: this.state } })

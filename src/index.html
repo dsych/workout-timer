@@ -13,43 +13,12 @@
             crossorigin="anonymous"
         />
         <script src="./index.js"></script>
-        <script src="./components/volume-controls.js"></script>
+        <!-- <script src="./components/volume-controls.js"></script> -->
         <script src="./components/sets.js"></script>
         <script src="./components/clock.js"></script>
         <script src="./components/start-button.js"></script>
         <script src="./components/countdown.js"></script>
     </head>
-
-    <template id="volume-controls">
-        <div class="controls">
-            <div id="sound" class="button">
-                <div id="enabled">
-                    <div class="fa fa-volume-up" aria-hidden="true"></div>
-                </div>
-                <div id="disabled" class="hidden">
-                    <div class="fa fa-volume-off" aria-hidden="true"></div>
-                </div>
-                <div
-                    id="percentage"
-                    style="font-size: 15px;"
-                    class="hidden"
-                ></div>
-            </div>
-            <div class="button" style="width: 50%">
-                <input
-                    id="mixer"
-                    type="range"
-                    min="0"
-                    max="100"
-                    style="width: 100%"
-                />
-            </div>
-            <div class="button" style="align-self: flex-end">
-                <div class="fa fa-ellipsis-v" aria-hidden="true"></div>
-            </div>
-        </div>
-    </template>
-
     <template id="laps">
         <div class="margin-vert-10">
             <div style="text-align: center;" class="label"></div>
@@ -71,10 +40,9 @@
 
     <template id="start">
         <div class="margin-vert-10">
-            <div
-                class="fa fa-play button play-button margin-sides-10"
-                aria-hidden="true"
-            ></div>
+            <div class="button footer play-button" aria-hidden="true">
+                Start
+            </div>
         </div>
     </template>
 
@@ -90,18 +58,6 @@
         <div
             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%"
         >
-            <volume-controls
-                id="sound-controls"
-                style="width: 100%"
-            ></volume-controls>
-            <set-count
-                id="count"
-                label="Sets"
-                style="background-color: coral;"
-            ></set-count>
-            <duration-clock id="work" label="Work Interval"></duration-clock>
-            <duration-clock id="rest" label="Rest Interval"></duration-clock>
-            <timed-countdown id="interval" class="hidden"></timed-countdown>
             <play-button
                 id="play-button"
                 style="width: 100%; background-color: darkmagenta;"
