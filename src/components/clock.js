@@ -4,8 +4,8 @@ const MAX = 3600;
 const MIN = 0;
 
 class Clock extends Laps {
-    constructor() {
-        super(
+    connectedCallback() {
+        super.connectedCallback(
             (oldV, newV) => {
                 return newV >= MIN && newV <= MAX ? newV : oldV;
             },

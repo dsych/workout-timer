@@ -1,20 +1,4 @@
 export class Laps extends HTMLElement {
-    constructor(update, format, initLaps) {
-        super();
-
-        this.update = update;
-        this.format = format;
-
-        this.captionEl = null;
-        this.minusEl = null;
-        this.plusEl = null;
-
-        this.lcount = initLaps;
-
-        this.handleMinus = this.handleMinus.bind(this);
-        this.handlePlus = this.handlePlus.bind(this);
-    }
-
     static get observedAttributes() {
         return ["laps", "label"];
     }
@@ -41,7 +25,15 @@ export class Laps extends HTMLElement {
         this.laps++;
     }
 
-    init() {
+    init(update, format, initLaps) {
+        this.update = update;
+        this.format = format;
+
+        this.lcount = initLaps;
+
+        this.handleMinus = this.handleMinus.bind(this);
+        this.handlePlus = this.handlePlus.bind(this);
+
         this.captionEl = this.querySelector(".caption");
         this.minusEl = this.querySelector(".minus");
         this.plusEl = this.querySelector(".plus");
@@ -54,10 +46,10 @@ export class Laps extends HTMLElement {
         this.plusEl.addEventListener("click", this.handlePlus);
     }
 
-    connectedCallback() {
+    connectedCallback(update, format, initLaps) {
         const template = document.querySelector("#laps");
         this.appendChild(document.importNode(template.content, true));
-        this.init();
+        this.init(update, format, initLaps);
         this.laps = this.lcount;
     }
 

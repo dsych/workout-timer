@@ -1,11 +1,4 @@
 class StartButton extends HTMLElement {
-    constructor() {
-        super();
-        this.buttonEl = null;
-        this.state = false;
-        this.handleClick = this.handleClick.bind(this);
-    }
-
     static get observedAttributes() {
         return ["paused"];
     }
@@ -14,10 +7,12 @@ class StartButton extends HTMLElement {
         if (this.buttonEl) {
             if (value === true || value === "true") {
                 this.state = true;
-                this.buttonEl.classList.replace("fa-play", "fa-pause");
+                this.buttonEl.classList.remove("fa-play");
+                this.buttonEl.classList.add("fa-pause");
             } else {
                 this.state = false;
-                this.buttonEl.classList.replace("fa-pause", "fa-play");
+                this.buttonEl.classList.remove("fa-pause");
+                this.buttonEl.classList.add("fa-play");
             }
             this.dispatchEvent(
                 new CustomEvent("start", { detail: { state: this.state } })
@@ -38,9 +33,12 @@ class StartButton extends HTMLElement {
     }
 
     init() {
+        this.state = false;
+        this.handleClick = this.handleClick.bind(this);
+
         this.buttonEl = this.querySelector(".play-button");
         this.buttonEl.addEventListener("click", this.handleClick);
-        paused = this.state;
+        this.paused = this.state;
     }
 
     connectedCallback() {

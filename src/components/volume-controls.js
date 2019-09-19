@@ -1,18 +1,4 @@
 class VolumeControls extends HTMLElement {
-    constructor() {
-        super();
-        this.soundEl = null;
-        this.mixerEl = null;
-        this.percentageEl = null;
-
-        this.oldPercentage = 0;
-
-        this.handleClick = this.handleClick.bind(this);
-        this.handleMouseDown = this.handleMouseDown.bind(this);
-        this.handleMouseUp = this.handleMouseUp.bind(this);
-        this.handleInput = this.handleInput.bind(this);
-    }
-
     static get observedAttributes() {
         return ["isSoundOn"];
     }
@@ -69,6 +55,13 @@ class VolumeControls extends HTMLElement {
     }
 
     init() {
+        this.oldPercentage = 0;
+
+        this.handleClick = this.handleClick.bind(this);
+        this.handleMouseDown = this.handleMouseDown.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+
         this.soundEl = this.querySelector("#sound");
         this.mixerEl = this.querySelector("#mixer");
         this.percentageEl = this.soundEl.querySelector("#percentage");
@@ -90,9 +83,7 @@ class VolumeControls extends HTMLElement {
             if (e.detail.track) {
                 const a = new Audio(e.detail.track);
                 a.volume = this.percentage / 100;
-                a.play().catch(err => {
-                    console.log(err.message);
-                });
+                a.play();
             }
         });
     }

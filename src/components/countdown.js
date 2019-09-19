@@ -1,17 +1,4 @@
 class Countdown extends HTMLElement {
-    constructor() {
-        super();
-        this.state = true;
-        this.timerEl = null;
-        this.currentIndexEl = null;
-        this.labelEl = null;
-
-        this.workLabel = "Work";
-        this.restLabel = "Rest";
-        this.prepareLabel = "Prepare";
-        this.doneLabel = "Done";
-    }
-
     static get observedAttributes() {
         return [
             "repeats",
@@ -94,6 +81,11 @@ class Countdown extends HTMLElement {
     }
 
     init() {
+        this.workLabel = "Work";
+        this.restLabel = "Rest";
+        this.prepareLabel = "Prepare";
+        this.doneLabel = "Done";
+
         this.pause = true;
         this.timerEl = this.querySelector(".timer");
         this.currentIndexEl = this.querySelector(".currentIndex");

@@ -1,4 +1,5 @@
 "use strict";
+import "document-register-element";
 
 window.addEventListener("load", () => {
     const playEl = document.querySelector("#play-button");

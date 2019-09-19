@@ -1,8 +1,8 @@
 import { Laps } from "./laps";
 
 class Sets extends Laps {
-    constructor() {
-        super(
+    connectedCallback() {
+        super.connectedCallback(
             (oldV, newV) => {
                 newV = +newV;
                 oldV = +oldV;
